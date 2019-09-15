@@ -95,22 +95,27 @@
 			
 			var _height = Math.floor(Math.random() * ($(window).height() - 250 + 1) + 50);
 			setTimeout(function(){
-					$("#block1").animate({left: "-50", height: _height}, 
-						5000, 
-						function(){
-							$(this).css('left', ($(window).width() - $(this).width()));
-							animateTheme();
-						});
+						$("#block1").stop(true, false);
+						var _num = Math.floor(Math.random() * (2) + 1);
+						if(_num == 1){
+							$("#block1").css({"bottom" : "", "top" : "2px", "left" : $(window).width()-50});
+						} else {
+							$("#block1").css({"bottom" : "2px", "top" : "", "left" : $(window).width()-50});
+						}
+						$("#block1").animate({left: "-50", height: _height}, 
+							5000, 
+							function(){
+								$(this).css('left', ($(window).width() - $(this).width()));
+							});
 			}, 
 			2000);
-			
+			 
 			var _height = Math.floor(Math.random() * ($(window).height() - 250 + 1) + 50);
 			setTimeout(function(){
 						$("#block2").animate({left: "-50", height: _height}, 
 						5000, 
 						function(){
 							$(this).css('left', ($(window).width() - $(this).width()));
-							animateTheme();
 						});
 			}, 3000);
 									

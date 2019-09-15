@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<title>JQuery Animation</title>
+	
+	<style type="text/css">
+		body{
+			//background-image: url("file:///C:/Users/Saurabh/Desktop/Projects/jQueryAnimation/background.jpg");
+		}
+		
+		#square{
+			height: 200px;
+			width: 200px;
+			bottom: 2px;
+			position: absolute;
+		}
+		
+		img{
+			height: 100%;
+			width: 100%;
+		}
+		
+		#block{
+			height: 0px;
+			width: 50px;
+			background-color: black;
+			bottom: 2px;
+			left: 50%;
+			position: absolute;
+		}
+		
+		#block1{
+			height: 0px;
+			width: 50px;
+			background-color: black;
+			bottom: 2px;
+			left: 70%;
+			position: absolute;
+		}
+		
+		#block2{
+			height: 0px;
+			width: 50px;
+			background-color: black;
+			bottom: 2px;
+			left: 90%;
+			position: absolute;
+		}
+		
+	</style>
+  </head>
+  
+  <body>
+	
+	<div id="square"><img alt="Paddling Man" title="Paddling Man" src="file:///C:/Users/Saurabh/Desktop/Projects/jQueryAnimation/movingObject.gif" /></div>
+	<div id="block"></div>
+	<div id="block1"></div>
+	<div id="block2"></div>
+	
+	<script type="text/javascript">
+		
+		$("#square").animate({left: "+=200"}, 5000, function(){
+			$("body").keyup(function(data){
+				if(data.originalEvent.code == 'Space'){
+					var _window = $(window).height();
+					var _bottom = $(window).height() - $("#square").position().top - $("#square").height();
+					var _top = $("#square").position().top;
+					
+					var _position = _bottom + 150;
+					if((_position + $("#square").height()) >= _window){
+						_position = _window - $("#square").height();
+					}	
+					
+					$("#square").stop(true, false);
+					$("#square").animate({bottom: _position}, 
+											500);
+					$("#square").animate({bottom: "0"}, 
+											3000);
+					
+				}						
+			});
+			animateTheme();
+		});
+		
+		function animateTheme(){
+			var _height = Math.floor(Math.random() * ($(window).height() - 250 + 1) + 50);
+			$("#block").animate({left: "-50", height: _height}, 
+						5000, 
+						function(){
+							$(this).css('left', ($(window).width() - $(this).width()));
+							animateTheme();
+						});
+			
+			var _height = Math.floor(Math.random() * ($(window).height() - 250 + 1) + 50);
+			setTimeout(function(){
+					$("#block1").animate({left: "-50", height: _height}, 
+						5000, 
+						function(){
+							$(this).css('left', ($(window).width() - $(this).width()));
+							animateTheme();
+						});
+			}, 
+			2000);
+			
+			var _height = Math.floor(Math.random() * ($(window).height() - 250 + 1) + 50);
+			setTimeout(function(){
+						$("#block2").animate({left: "-50", height: _height}, 
+						5000, 
+						function(){
+							$(this).css('left', ($(window).width() - $(this).width()));
+							animateTheme();
+						});
+			}, 3000);
+									
+		}	
+		
+		function overlap(){
+			$(window).height() - $("#block").position().top;
+			$("#block").position().left;
+			$("#block").width();
+			
+			
+		}
+
+	</script>
+  </body>
+  
+</html>
